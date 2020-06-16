@@ -41,5 +41,34 @@ namespace ExtensionsNet.Tests
 
             result.Should().BeEquivalentTo(expectedValue);
         }
+
+        [Theory]
+        [InlineData("0")]
+        [InlineData("0.0")]
+        [InlineData("0.0000")]
+        [InlineData("1")]
+        [InlineData("1.0")]
+        [InlineData("01")]
+        [InlineData("01.1")]
+        [InlineData("011111111.23123123123")]
+        [InlineData("1231231231231200989040918")]
+        public void IsNumeric_ShouldReturnTrueForFloatsAndIntegers(string value)
+        {
+            Boolean result = value.IsNumeric();
+
+            result.Should().BeTrue();
+        }
+
+        [Theory]
+        [InlineData("0a")]
+        [InlineData("a0")]
+        [InlineData("123213a123123")]
+        [InlineData("1..2")]
+        public void IsNumeric_ShouldReturnFalseForNonNumbers(string value)
+        {
+            Boolean result = value.IsNumeric();
+
+            result.Should().BeFalse();
+        }
     }
 }

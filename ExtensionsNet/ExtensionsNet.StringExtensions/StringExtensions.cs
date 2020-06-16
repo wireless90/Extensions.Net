@@ -41,6 +41,13 @@ namespace ExtensionsNet.StringExtensions
                     return new String(charArray);
                 }));
         }
+
+        public static Boolean IsNumeric(this String value)
+        {
+            if (long.TryParse(value, out _) || ulong.TryParse(value, out _) || decimal.TryParse(value, out _))
+                return true;
+            return false;
+        }
     }
 
     
