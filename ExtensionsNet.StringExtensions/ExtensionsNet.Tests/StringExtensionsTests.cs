@@ -28,5 +28,18 @@ namespace ExtensionsNet.Tests
 
             result.Should().BeEquivalentTo(expectedValue);
         }
+
+        [Theory]
+        [InlineData("what are you doing?", "What Are You Doing?")]
+        [InlineData("", "")]
+        [InlineData("HELLO", "Hello")]
+        [InlineData("hello", "Hello")]
+        [InlineData("what      are    you      doing?", "What Are You Doing?")]
+        public void Capitalize_ShouldReturnExpectedValueString(string value, string expectedValue)
+        {
+            String result = value.Capitalize();
+
+            result.Should().BeEquivalentTo(expectedValue);
+        }
     }
 }

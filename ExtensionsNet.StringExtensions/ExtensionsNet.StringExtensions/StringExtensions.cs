@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace ExtensionsNet.StringExtensions
 {
@@ -27,5 +29,19 @@ namespace ExtensionsNet.StringExtensions
 
             return value.Substring(leftSubstringIndex, rightSubstringIndex);
         }
+
+        public static String Capitalize(this String value)
+        {
+            return String.Join(' ', value.Split(' ')
+                .Where(x => !String.IsNullOrWhiteSpace(x))
+                .Select(x => 
+                {
+                    var charArray = x.ToLower().ToCharArray();
+                    charArray[0] = Char.ToUpper(charArray[0]);
+                    return new String(charArray);
+                }));
+        }
     }
+
+    
 }
